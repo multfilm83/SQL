@@ -1,7 +1,7 @@
 --SQL_DDL
 
 
---РЎРѕР·РґР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ employees
+--Создать таблицу employees
 -- id. serial,  primary key,
 -- employee_name. Varchar(50), not null
 
@@ -10,7 +10,7 @@ create table employees(
 	employee_name varchar(50) not null
 );
 
---РќР°РїРѕР»РЅРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ employee 70 СЃС‚СЂРѕРєР°РјРё.
+--Наполнить таблицу employee 70 строками.
 insert into employees(id, employee_name)
 values (default, 'Mikhail Kerzhakov'),
 	   (default, 'Daniel Odoevskiy'),
@@ -87,8 +87,8 @@ values (default, 'Mikhail Kerzhakov'),
 select * from employees;
 
 
---РўР°Р±Р»РёС†Р° salary
---РЎРѕР·РґР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ salary
+--Таблица salary
+--Создать таблицу salary
 -- id. Serial  primary key,
 -- monthly_salary. Int, not null
 create table salary(
@@ -97,7 +97,7 @@ create table salary(
 );
 
 
---РќР°РїРѕР»РЅРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ salary 15 СЃС‚СЂРѕРєР°РјРё:
+--Наполнить таблицу salary 15 строками:
 insert into salary(monthly_salary)
 values (1000),
 	   (1100),
@@ -118,7 +118,7 @@ values (1000),
 	   
 select * from salary;
 
---РЎРѕР·РґР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ employee_salary
+--Создать таблицу employee_salary
 -- id. Serial  primary key,
 -- employee_id. Int, not null, unique
 -- salary_id. Int, not null
@@ -129,8 +129,8 @@ create table employee_salary(
 	salary_id int not null
 );
 
---РќР°РїРѕР»РЅРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ employee_salary 40 СЃС‚СЂРѕРєР°РјРё:
--- РІ 10 СЃС‚СЂРѕРє РёР· 40 РІСЃС‚Р°РІРёС‚СЊ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёРµ employee_id
+--Наполнить таблицу employee_salary 40 строками:
+-- в 10 строк из 40 вставить несуществующие employee_id
 
 insert into employee_salary (id, employee_id, salary_id)
 values (default, 1, 1),
@@ -176,7 +176,7 @@ values (default, 1, 1),
      
 select * from employee_salary; 
 
---РЎРѕР·РґР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ roles
+--Создать таблицу roles
 -- id. Serial  primary key,
 -- role_name. int, not null, unique
 
@@ -185,12 +185,12 @@ create table roles(
 	role_name int not null unique
 );
 
---РџРѕРјРµРЅСЏС‚СЊ С‚РёРї СЃС‚РѕР»Р±Р° role_name СЃ int РЅР° varchar(30)
+--Поменять тип столба role_name с int на varchar(30)
 
 alter table roles
 alter column role_name type varchar(30);
 
---РќР°РїРѕР»РЅРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ roles 20 СЃС‚СЂРѕРєР°РјРё:
+--Наполнить таблицу roles 20 строками:
 insert into roles (id, role_name)
 values (default, 'Junior Python developer'),
 	   (default, 'Middle Python developer'),
@@ -215,10 +215,10 @@ values (default, 'Junior Python developer'),
 
 select * from roles;
 
---РЎРѕР·РґР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ roles_employee
+--Создать таблицу roles_employee
 -- id. Serial  primary key,
--- employee_id. Int, not null, unique (РІРЅРµС€РЅРёР№ РєР»СЋС‡ РґР»СЏ С‚Р°Р±Р»РёС†С‹ employees, РїРѕР»Рµ id)
--- role_id. Int, not null (РІРЅРµС€РЅРёР№ РєР»СЋС‡ РґР»СЏ С‚Р°Р±Р»РёС†С‹ roles, РїРѕР»Рµ id)
+-- employee_id. Int, not null, unique (внешний ключ для таблицы employees, поле id)
+-- role_id. Int, not null (внешний ключ для таблицы roles, поле id)
 
 create table roles_employee(
 	id serial primary key,
@@ -230,7 +230,7 @@ create table roles_employee(
 			references roles (id)
 );
 
---РќР°РїРѕР»РЅРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ roles_employee 40 СЃС‚СЂРѕРєР°РјРё:
+--Наполнить таблицу roles_employee 40 строками:
 insert into roles_employee (id, employee_id, role_id) 
 values (default, 5, 3),
 	   (default, 7, 5),
@@ -274,3 +274,4 @@ values (default, 5, 3),
 	   (default, 22, 20);
 
 select * from roles_employee;
+
